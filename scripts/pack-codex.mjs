@@ -20,12 +20,18 @@ mkdirSync(join(stage, '.codex-plugin'), { recursive: true });
 mkdirSync(join(stage, 'dist'), { recursive: true });
 mkdirSync(join(stage, 'assets'), { recursive: true });
 
+// per-connector Codex listing: package.json "codex" {shortDescription, category, brandColor, defaultPrompt (max 3, <=128 chars)}
+const codex = pkg.codex ?? {};
+for (const k of ['shortDescription', 'category', 'brandColor', 'defaultPrompt']) if (!codex[k]) throw new Error(`package.json codex.${k} is missing`);
+if (codex.defaultPrompt.length > 3 || codex.defaultPrompt.some((t) => t.length > 128)) throw new Error('codex.defaultPrompt: at most 3 prompts of 128 characters');
+const PREFIX = name.replace(/-mcp-server$/, '').toUpperCase();
+
 // environment the server reads: install detection, ports, temp folders, user folders
 const ENV_VARS = [
   'PATH', 'Path', 'HOME', 'USERPROFILE', 'LOCALAPPDATA', 'APPDATA', 'ProgramFiles', 'ProgramFiles(x86)', 'TEMP', 'TMP', 'TMPDIR',
   'SystemRoot', 'XDG_CONFIG_HOME', 'XDG_DATA_HOME', 'DISPLAY', 'WAYLAND_DISPLAY',
   ...Object.keys(manifest.server.mcp_config.env ?? {}),
-  'DESIGNCRAFT_APP', 'DESIGNCRAFT_MCP_TIMEOUT',
+  `${PREFIX}_APP`, `${PREFIX}_MCP_TIMEOUT`,
 ];
 
 const plugin = {
@@ -40,20 +46,16 @@ const plugin = {
   mcpServers: './.mcp.json',
   interface: {
     displayName: manifest.display_name,
-    shortDescription: 'Page layout, data merge and print-ready PDF with your local DesignCraft',
+    shortDescription: codex.shortDescription,
     longDescription: manifest.long_description,
     developerName: manifest.author.name,
-    category: 'Design',
+    category: codex.category,
     capabilities: ['Read', 'Write'],
     websiteURL: manifest.homepage,
     privacyPolicyURL: `${manifest.homepage}#safety`,
     termsOfServiceURL: `${manifest.homepage}/blob/main/LICENSE`,
-    defaultPrompt: [
-      'Make an A5 flyer for my café as a print-ready PDF',
-      'Create a badge for every person in a CSV, with photo, name and role',
-      'Export these InDesign IDML files to PDF/X-4',
-    ],
-    brandColor: '#7B2FF7',
+    defaultPrompt: codex.defaultPrompt,
+    brandColor: codex.brandColor,
     composerIcon: './assets/icon.png',
     logo: './assets/icon.png',
     screenshots: [],

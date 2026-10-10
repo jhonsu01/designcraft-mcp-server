@@ -58,5 +58,15 @@
     "esbuild": "^0.28.2",
     "typescript": "^5.9.3",
     "vitest": "^5.0.3"
+  },
+  "codex": {
+    "shortDescription": "Page layout, data merge and print-ready PDF with your local DesignCraft",
+    "category": "Design",
+    "brandColor": "#7B2FF7",
+    "defaultPrompt": [
+      "Make an A5 flyer for my café as a print-ready PDF",
+      "Create a badge for every person in a CSV, with photo, name and role",
+      "Export these InDesign IDML files to PDF/X-4"
+    ]
   }
 }
