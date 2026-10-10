@@ -1,0 +1,40 @@
+node_modules/
+dist/
+*.mcpb
+.tmp/
+*.tsbuildinfo
+.env
+.env.*
+.codegraph/
+NVIDIA Corporation/
+
+# Personal media: never publish anything from this folder
+pruebas/
+
+# Personal documents, data, media and exports
+*.designcraft
+*.idml
+*.indd
+*.pdf
+*.epub
+*.html
+*.csv
+*.tsv
+*.xlsx
+*.png
+*.jpg
+*.jpeg
+*.tif
+*.tiff
+*.webp
+*.gif
+*.svg
+*.psd
+*.ai
+*.eps
+*.otf
+*.ttf
+*.woff
+*.woff2
+*_package/
+!icon.png

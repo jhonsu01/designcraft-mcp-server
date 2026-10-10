@@ -1,0 +1,122 @@
+{
+  "manifest_version": "0.3",
+  "name": "designcraft-mcp-server",
+  "version": "1.0.0",
+  "display_name": "DesignCraft Bridge",
+  "description": "Lay out flyers, posters, brochures, menus, cards, certificates and book pages, mail-merge CSV data, edit .designcraft and InDesign .idml documents and export print-ready PDF (PDF/X-4), PNG, IDML, EPUB and HTML, using the DesignCraft publishing app installed on Windows, macOS or Linux. Not affiliated with DesignCraft or Storytold.",
+  "long_description": "DesignCraft Bridge lets Claude do page layout with the DesignCraft you already have installed on Windows, macOS or Linux (tested with 0.5.0), the open-source, InDesign-class desktop publishing app.\n\n- **Create layouts**: flyers, posters, brochures, menus, business cards, certificates, newsletters, reports and book pages from text frames (fonts, sizes, colours, alignment, columns, paragraph styles), images (fill or fit), rectangles, ellipses, polygons and lines (fills, gradients, strokes, rounded corners, opacity, drop shadows, text wrap) and tables. Sizes in pt, mm, cm, in or px; any page size or preset, facing pages, margins, columns and bleed.\n- **Data merge**: one page per record (letters, certificates, invitations, badges) or several records per page (labels, business cards) from a CSV or a list of rows, with <<Field>> text and pictures whose paths come from the data.\n- **Edit documents**: find / change (also GREP), replace stories, swap images, replace fonts, add pages and items in .designcraft or InDesign .idml files, written as a new copy.\n- **Export**: PDF with page ranges, PDF/X-4 or PDF/A-2b, bleed, crop marks, spreads and tags; PNG / JPG pages at any dpi; IDML; reflowable or fixed EPUB; HTML; booklet PDFs; and packages with links, fonts and a report.\n- **Inspect and automate**: pages, items, stories and overset text, styles, swatches, fonts, links and preflight issues; page previews; any of the 444 engine commands, headless or in the open app.\n\nThe connector drives DesignCraft's own headless engine (designcraft-cli) with in-memory documents: your documents, images and data are only read, and nothing is overwritten unless you ask. Everything runs locally with no network access. DesignCraft is an open-source project by Storytold; this connector is not affiliated with or endorsed by them.",
+  "author": {
+    "name": "Jhon Supelano",
+    "url": "https://github.com/jhonsu01"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jhonsu01/designcraft-mcp-server.git"
+  },
+  "homepage": "https://github.com/jhonsu01/designcraft-mcp-server",
+  "support": "https://github.com/jhonsu01/designcraft-mcp-server/issues",
+  "icon": "icon.png",
+  "server": {
+    "type": "node",
+    "entry_point": "dist/bundle.cjs",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/dist/bundle.cjs"
+      ],
+      "env": {
+        "DESIGNCRAFT_DIR": "${user_config.designcraft_dir}",
+        "DESIGNCRAFT_CLI": "${user_config.designcraft_cli}",
+        "DESIGNCRAFT_CONTROL_PORT": "${user_config.control_port}"
+      }
+    }
+  },
+  "user_config": {
+    "designcraft_dir": {
+      "type": "directory",
+      "title": "DesignCraft folder",
+      "description": "Install folder of DesignCraft (or DesignCraft.app on macOS). Leave empty to auto-detect: C:\\Program Files\\DesignCraft, /Applications/DesignCraft.app, /usr/bin, /opt/designcraft or PATH.",
+      "required": false
+    },
+    "designcraft_cli": {
+      "type": "file",
+      "title": "designcraft-cli executable (optional)",
+      "description": "Only if it is somewhere else, e.g. where you unzipped designcraft-cli-<version>-macos-universal.zip on macOS.",
+      "required": false
+    },
+    "control_port": {
+      "type": "string",
+      "title": "DesignCraft control port (optional)",
+      "description": "Port used to drive the DesignCraft app (live mode). Default 7981.",
+      "required": false
+    }
+  },
+  "compatibility": {
+    "platforms": [
+      "win32",
+      "darwin",
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=20.0.0"
+    }
+  },
+  "tools": [
+    {
+      "name": "create_layout",
+      "description": "Lay out pages from text, images, shapes, lines and tables → PDF, PNG, IDML..."
+    },
+    {
+      "name": "data_merge",
+      "description": "Mail-merge a CSV into a template: letters, certificates, badges, labels"
+    },
+    {
+      "name": "export_document",
+      "description": "Export .designcraft / .idml to PDF/X, PNG, JPG, IDML, EPUB, HTML, booklet, package"
+    },
+    {
+      "name": "edit_document",
+      "description": "Find / change, replace text, images and fonts, add pages and items"
+    },
+    {
+      "name": "get_document_info",
+      "description": "Pages, items, stories, styles, fonts, links and preflight of a document"
+    },
+    {
+      "name": "render_pages",
+      "description": "See pages of a document"
+    },
+    {
+      "name": "list_designcraft_catalog",
+      "description": "Commands, page presets, fonts, formats"
+    },
+    {
+      "name": "run_designcraft_commands",
+      "description": "Run any DesignCraft engine commands, headless or live"
+    },
+    {
+      "name": "open_in_designcraft",
+      "description": "Open documents in the DesignCraft app"
+    },
+    {
+      "name": "get_designcraft_status",
+      "description": "Check the DesignCraft installation and version"
+    }
+  ],
+  "keywords": [
+    "designcraft",
+    "indesign",
+    "idml",
+    "desktop-publishing",
+    "layout",
+    "pdf",
+    "pdf-x",
+    "data-merge",
+    "print",
+    "epub",
+    "windows",
+    "macos",
+    "linux"
+  ],
+  "license": "Apache-2.0"
+}
