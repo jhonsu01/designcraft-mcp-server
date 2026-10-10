@@ -1,8 +1,9 @@
 // Packs the server as a Codex plugin: <name>-<version>-codex.zip holding one folder <name>/ with
 // .codex-plugin/plugin.json, .mcp.json (a local stdio server: node ./dist/bundle.cjs), the bundle, the icon and docs.
 // Metadata comes from manifest.json (the .mcpb manifest), so both packages stay in step.
-// Usage: npm run build && node scripts/pack-codex.mjs
-import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'fs';
+// Usage: npm run build && node scripts/pack-codex.mjs [--to <marketplace>/plugins]
+//   --to also copies the plugin folder into a Codex marketplace checkout (replacing <dir>/<name>).
+import { copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'fs';
 import { dirname, join, relative } from 'path';
 import { deflateRawSync } from 'zlib';
 
@@ -123,3 +124,11 @@ const out = join(root, `${name}-${manifest.version}-codex.zip`);
 writeFileSync(out, Buffer.concat([...locals, ...centrals, end]));
 console.log(`${out} (${files.length} files, ${statSync(out).size} bytes)`);
 for (const f of files) console.log(`  ${name}/${relative(stage, f).split('\\').join('/')}`);
+
+const toIdx = process.argv.indexOf('--to');
+if (toIdx > 0) {
+  const dest = join(process.argv[toIdx + 1], name);
+  rmSync(dest, { recursive: true, force: true });
+  cpSync(stage, dest, { recursive: true });
+  console.log(`copied to ${dest}`);
+}

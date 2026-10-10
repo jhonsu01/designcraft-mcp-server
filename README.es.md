@@ -113,6 +113,8 @@ Las medidas van en **pt** salvo que `units` diga `mm`, `cm`, `in` o `px`; `x` / 
 
 ### Codex (OpenAI)
 
+**Recomendado — el marketplace (recibe actualizaciones):** *Complementos → Añadir → Añadir marketplace*, origen `jhonsu01/craft-marketplace`, referencia `main`, y luego instala **DesignCraft Bridge** desde **Craft Bridges** ([craft-marketplace](https://github.com/jhonsu01/craft-marketplace)). Las versiones nuevas llegan al actualizar el marketplace. O sube el zip (Codex lo guarda en tu cuenta y rechaza un zip más nuevo con el mismo nombre):
+
 1. Descarga `designcraft-mcp-server-<versión>-codex.zip` de la [última versión](https://github.com/jhonsu01/designcraft-mcp-server/releases/latest).
 2. En Codex: *Complementos → Añadir → Nuevo complemento*, elige el zip y pulsa **Añadir complemento**.
 3. Codex arranca el servidor con `node`, así que Node.js ≥ 20 debe estar en el `PATH`. Si DesignCraft no está en una ubicación estándar, define `DESIGNCRAFT_DIR` o `DESIGNCRAFT_CLI` como variables de entorno del sistema (Codex no tiene formulario de configuración para complementos locales).

@@ -113,6 +113,8 @@
 
 ### Codex（OpenAI）
 
+**推奨 — マーケットプレイス（更新を受け取れます）：** *プラグイン → 追加 → マーケットプレイスを追加* で、ソースに `jhonsu01/craft-marketplace`、参照に `main` を指定し、**Craft Bridges** から **DesignCraft Bridge** をインストールします（[craft-marketplace](https://github.com/jhonsu01/craft-marketplace)）。新しいバージョンはマーケットプレイスの更新で届きます。または zip をアップロードします（Codex はアカウントに保存し、同じ名前の新しい zip を拒否します）：
+
 1. [最新リリース](https://github.com/jhonsu01/designcraft-mcp-server/releases/latest)から `designcraft-mcp-server-<バージョン>-codex.zip` をダウンロードします。
 2. Codex で *プラグイン → 追加 → 新しいプラグイン* を開き、zip を選んで **プラグインを追加** をクリックします。
 3. Codex はサーバーを `node` で起動するため、`PATH` に Node.js ≥ 20 が必要です。DesignCraft が標準の場所にない場合は、`DESIGNCRAFT_DIR` または `DESIGNCRAFT_CLI` をシステムの環境変数として設定してください（Codex にはローカルプラグイン用の設定画面がありません）。

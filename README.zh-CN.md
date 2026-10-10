@@ -113,6 +113,8 @@
 
 ### Codex（OpenAI）
 
+**推荐 —— 插件市场（可获得更新）：** *插件 → 添加 → 添加插件市场*，来源 `jhonsu01/craft-marketplace`，引用 `main`，然后从 **Craft Bridges** 安装 **DesignCraft Bridge**（[craft-marketplace](https://github.com/jhonsu01/craft-marketplace)）。刷新插件市场即可获得新版本。或者上传 zip（Codex 会把它保存在你的账户中，并拒绝同名的新版 zip）：
+
 1. 从[最新发布](https://github.com/jhonsu01/designcraft-mcp-server/releases/latest)下载 `designcraft-mcp-server-<版本>-codex.zip`。
 2. 在 Codex 中：*插件 → 添加 → 新插件*，选择该 zip，然后点击 **添加插件**。
 3. Codex 用 `node` 启动服务器，因此 `PATH` 中必须有 Node.js ≥ 20。如果 DesignCraft 不在标准位置，请把 `DESIGNCRAFT_DIR` 或 `DESIGNCRAFT_CLI` 设为系统环境变量（Codex 没有本地插件的设置表单）。

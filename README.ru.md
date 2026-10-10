@@ -113,6 +113,8 @@
 
 ### Codex (OpenAI)
 
+**Рекомендуется — маркетплейс (получает обновления):** *Плагины → Добавить → Добавить маркетплейс*, источник `jhonsu01/craft-marketplace`, ссылка `main`, затем установите **DesignCraft Bridge** из **Craft Bridges** ([craft-marketplace](https://github.com/jhonsu01/craft-marketplace)). Новые версии приходят при обновлении маркетплейса. Или загрузите zip (Codex сохранит его в вашей учётной записи и отклонит более новый zip с тем же именем):
+
 1. Скачайте `designcraft-mcp-server-<версия>-codex.zip` из [последнего релиза](https://github.com/jhonsu01/designcraft-mcp-server/releases/latest).
 2. В Codex: *Плагины → Добавить → Новый плагин*, выберите zip и нажмите **Добавить плагин**.
 3. Codex запускает сервер через `node`, поэтому Node.js ≥ 20 должен быть в `PATH`. Если DesignCraft установлен не в стандартное место, задайте `DESIGNCRAFT_DIR` или `DESIGNCRAFT_CLI` как системные переменные окружения (у Codex нет формы настроек для локальных плагинов).
