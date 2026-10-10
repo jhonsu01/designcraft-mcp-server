@@ -42,3 +42,4 @@ dist/**/*.map
 dist/**/*.js
 dist/**/*.d.ts
 package-lock.json
+*.zip

@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.1] - 2026-10-10
+### Fixed
+- `background` no longer draws a thin black outline around the page: DesignCraft gives new frames a black stroke by
+  default and the background rectangle kept it.
+### Added
+- Codex (OpenAI) plugin: each release also ships `designcraft-mcp-server-<version>-codex.zip` with
+  `.codex-plugin/plugin.json` and `.mcp.json` (a local stdio server, `node ./dist/bundle.cjs`), built by
+  `npm run pack:codex` from the same bundle and manifest as the `.mcpb`.
+### Verified
+- Windows 11 and Debian 12 (Docker): 27/27 end-to-end checks each (new: the background has no outline); the Codex zip
+  extracted with two tools and its server started from `.mcp.json` with only the listed environment, on both systems.
+
 ## [1.0.0] - 2026-10-10
 ### Added
 - MCP server on DesignCraft's own engine (`designcraft-cli mcp`): one private, headless engine per job with in-memory

@@ -120,6 +120,9 @@ const info = await call('get_document_info', { input_path: fo.designcraft?.path 
 const p1 = info.pages?.[0];
 check(info.success && info.page_count === 2 && p1?.items?.length >= 8 && JSON.stringify(info.paragraph_styles ?? '').includes('Título'), `get_document_info: 2 pages, ${p1?.items?.length} items on page 1, the styles`);
 check(Array.isArray(info.links) && info.links.length >= 1 && Array.isArray(info.fonts), `get_document_info: ${info.links?.length} link(s), ${info.fonts?.length} fonts, preflight ${Array.isArray(info.preflight) ? info.preflight.length : '?'} issue(s)`);
+const insp = await call('run_designcraft_commands', { open_path: fo.designcraft?.path ?? '', steps: [{ id: 'inspect_document' }] });
+const bg = insp.results?.[0]?.result?.spreads?.[0]?.items?.[0];
+check(bg?.fill === '#fdf6ec' && bg?.stroke?.swatch === '[None]', `create_layout: the page background has no outline (stroke ${bg?.stroke?.swatch})`);
 const rp = await call('render_pages', { input_path: fo.designcraft?.path ?? '', pages: '1-2', max_side: 400, save_dir: join(out, 'render') });
 check(rp.success && rp._imgs === 2 && rp.saved?.length === 2 && rp.saved.every((f) => existsSync(f)), 'render_pages: 2 previews saved as PNG');
 

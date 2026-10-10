@@ -111,6 +111,12 @@
 2. 双击它（或拖入 Claude Desktop → *设置 → 扩展*），然后点击 **安装**。
 3. 可选：如果 DesignCraft 不在标准位置，在扩展设置中填写其文件夹或 `designcraft-cli` 的路径。
 
+### Codex（OpenAI）
+
+1. 从[最新发布](https://github.com/jhonsu01/designcraft-mcp-server/releases/latest)下载 `designcraft-mcp-server-<版本>-codex.zip`。
+2. 在 Codex 中：*插件 → 添加 → 新插件*，选择该 zip，然后点击 **添加插件**。
+3. Codex 用 `node` 启动服务器，因此 `PATH` 中必须有 Node.js ≥ 20。如果 DesignCraft 不在标准位置，请把 `DESIGNCRAFT_DIR` 或 `DESIGNCRAFT_CLI` 设为系统环境变量（Codex 没有本地插件的设置表单）。
+
 ### Claude Code / 其他 MCP 客户端
 
 ```bash
@@ -153,8 +159,9 @@ claude mcp add designcraft -- node "$PWD/dist/bundle.cjs"
 ```bash
 npm run build       # TypeScript + 单文件 bundle（dist/bundle.cjs）
 npm test            # 单元测试（Windows、macOS 和 Linux 路径逻辑）
-npm run test:e2e    # 通过真实 MCP stdio 的 26 项端到端检查（合成图片和 CSV）
+npm run test:e2e    # 通过真实 MCP stdio 的 27 项端到端检查（合成图片和 CSV）
 npm run pack:mcpb   # designcraft-mcp-server.mcpb
+npm run pack:codex  # Codex 插件 zip
 ```
 
 在 Docker 中测试 Linux（先解压 `designcraft-<版本>-linux-x86_64.tar.gz`）：

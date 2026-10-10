@@ -247,6 +247,8 @@ export async function newDocument(s: DesignCraftSession, a: DocArgs, ctx: Ctx): 
     for (const pg of ctx.pages) {
       const r = await s.cmd('frame.create', { spread: pg.spread, rect: [pg.x0, pg.y0, pg.x0 + pg.w, pg.y0 + pg.h], content: 'unassigned' });
       await s.cmd('object.fill', { swatch: await swatchFor(s, a.background, ctx.swatches), ids: [r.id] });
+      // new frames get a black stroke by default: a background has none
+      await s.cmd('object.stroke', { swatch: '[None]', ids: [r.id] });
     }
   }
   await addStyles(s, a.styles, ctx);

@@ -111,6 +111,12 @@ As medidas são em **pt**, a menos que `units` diga `mm`, `cm`, `in` ou `px`; `x
 2. Dê um clique duplo (ou arraste para o Claude Desktop → *Configurações → Extensões*) e clique em **Instalar**.
 3. Opcional: se o DesignCraft não estiver em um local padrão, informe a pasta dele ou o caminho do `designcraft-cli` nas configurações da extensão.
 
+### Codex (OpenAI)
+
+1. Baixe `designcraft-mcp-server-<versão>-codex.zip` da [versão mais recente](https://github.com/jhonsu01/designcraft-mcp-server/releases/latest).
+2. No Codex: *Plugins → Adicionar → Novo plugin*, escolha o zip e clique em **Adicionar plugin**.
+3. O Codex inicia o servidor com `node`, então o Node.js ≥ 20 precisa estar no `PATH`. Se o DesignCraft não estiver em um local padrão, defina `DESIGNCRAFT_DIR` ou `DESIGNCRAFT_CLI` como variáveis de ambiente do sistema (o Codex não tem formulário de configuração para plugins locais).
+
 ### Claude Code / outros clientes MCP
 
 ```bash
@@ -153,8 +159,9 @@ claude mcp add designcraft -- node "$PWD/dist/bundle.cjs"
 ```bash
 npm run build       # TypeScript + bundle de arquivo único (dist/bundle.cjs)
 npm test            # testes unitários (lógica de caminhos de Windows, macOS e Linux)
-npm run test:e2e    # 26 verificações de ponta a ponta sobre MCP stdio real (imagens e CSV sintéticos)
+npm run test:e2e    # 27 verificações de ponta a ponta sobre MCP stdio real (imagens e CSV sintéticos)
 npm run pack:mcpb   # designcraft-mcp-server.mcpb
+npm run pack:codex  # zip de plugin para o Codex
 ```
 
 Teste de Linux no Docker (descompacte antes `designcraft-<versão>-linux-x86_64.tar.gz`):

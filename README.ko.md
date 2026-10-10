@@ -111,6 +111,12 @@
 2. 두 번 클릭하거나 Claude Desktop → *설정 → 확장 프로그램*으로 끌어다 놓고 **설치**를 누릅니다.
 3. 선택: DesignCraft가 표준 위치에 없다면 확장 프로그램 설정에서 해당 폴더나 `designcraft-cli` 경로를 입력합니다.
 
+### Codex (OpenAI)
+
+1. [최신 릴리스](https://github.com/jhonsu01/designcraft-mcp-server/releases/latest)에서 `designcraft-mcp-server-<버전>-codex.zip`을 내려받습니다.
+2. Codex에서 *플러그인 → 추가 → 새 플러그인*을 열고 zip을 선택한 뒤 **플러그인 추가**를 누릅니다.
+3. Codex는 `node`로 서버를 시작하므로 `PATH`에 Node.js ≥ 20이 있어야 합니다. DesignCraft가 표준 위치에 없다면 `DESIGNCRAFT_DIR` 또는 `DESIGNCRAFT_CLI`를 시스템 환경 변수로 설정하세요(Codex에는 로컬 플러그인용 설정 화면이 없습니다).
+
 ### Claude Code / 기타 MCP 클라이언트
 
 ```bash
@@ -153,8 +159,9 @@ claude mcp add designcraft -- node "$PWD/dist/bundle.cjs"
 ```bash
 npm run build       # TypeScript + 단일 파일 번들(dist/bundle.cjs)
 npm test            # 단위 테스트(Windows, macOS, Linux 경로 처리)
-npm run test:e2e    # 실제 MCP stdio를 통한 26개 종단 간 검사(합성 이미지와 CSV)
+npm run test:e2e    # 실제 MCP stdio를 통한 27개 종단 간 검사(합성 이미지와 CSV)
 npm run pack:mcpb   # designcraft-mcp-server.mcpb
+npm run pack:codex  # Codex 플러그인 zip
 ```
 
 Docker에서 Linux 테스트(먼저 `designcraft-<버전>-linux-x86_64.tar.gz`를 풀어 두세요):

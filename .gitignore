@@ -38,3 +38,4 @@ pruebas/
 *.woff2
 *_package/
 !icon.png
+*.zip
