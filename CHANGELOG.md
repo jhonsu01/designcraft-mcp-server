@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.2] - 2026-10-10
+### Fixed
+- Output names keep their dots: `name: "menu-1.0.1"` now writes `menu-1.0.1.pdf` (1.0.0 and 1.0.1 took `.1` for an
+  extension and wrote `menu-1.0.pdf`). A real output extension in the name (`flyer.pdf`) is still dropped.
+### Verified
+- Windows 11 and Debian 12 (Docker): 28/28 end-to-end checks each (new: dots in the output name); the `.mcpb` and the
+  Codex zip both tested unpacked.
+
 ## [1.0.1] - 2026-10-10
 ### Fixed
 - `background` no longer draws a thin black outline around the page: DesignCraft gives new frames a black stroke by

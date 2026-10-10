@@ -333,7 +333,7 @@ export function registerLayoutTools(server: McpServer): void {
           await newDocument(s, args, ctx);
           const items = await addItems(s, args.items, ctx);
           const info = await checks(s);
-          const outputs = await exportAll(s, { stemSource: path.join(dir, args.name), suffix: '', output_dir: dir, output_path: args.output_path, overwrite: args.overwrite }, args.formats, args);
+          const outputs = await exportAll(s, { stemSource: path.join(dir, args.name), name: args.name, suffix: '', output_dir: dir, output_path: args.output_path, overwrite: args.overwrite }, args.formats, args);
           return withPreview({ success: true, ...info, items, outputs }, await previews(s, args.preview_pages, Number(info['pages'] ?? 1)));
         });
       } catch (e) {
@@ -399,7 +399,7 @@ export function registerLayoutTools(server: McpServer): void {
             ...(args.records ? { range: args.records } : {}),
           });
           const info = await checks(s);
-          const outputs = await exportAll(s, { stemSource: path.join(dir, args.name), suffix: '', output_dir: dir, output_path: args.output_path, overwrite: args.overwrite }, args.formats, args);
+          const outputs = await exportAll(s, { stemSource: path.join(dir, args.name), name: args.name, suffix: '', output_dir: dir, output_path: args.output_path, overwrite: args.overwrite }, args.formats, args);
           return withPreview(
             { success: true, fields: (fields ?? []).map((f: any) => f.name), records: r?.records, pages: r?.pages, ...(r?.missingImages?.length ? { missing_images: r.missingImages } : {}), ...(r?.oversetStories ? { overset_stories: r.oversetStories } : {}), ...(r?.warnings?.length ? { warnings: r.warnings } : {}), ...info, outputs },
             await previews(s, args.preview_pages, Number(info['pages'] ?? 1)),

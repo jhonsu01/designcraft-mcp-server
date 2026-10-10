@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { cleanEnv, connectorDir, resolveInstall, resolveInt } from '../../src/config.js';
 import { resolveOutputPath, sameFile } from '../../src/paths.js';
 import { substitute } from '../../src/tools/advanced.js';
-import { OUTPUTS, collectInputs, freeFolder, parsePages, toPt } from '../../src/tools/common.js';
+import { OUTPUTS, collectInputs, freeFolder, nameStem, parsePages, toPt } from '../../src/tools/common.js';
 import { itemSchema, styleSchema, toCsv } from '../../src/tools/layout.js';
 
 describe('config', () => {
@@ -50,6 +50,12 @@ describe('paths, units and formats', () => {
     mkdirSync(join(dir, 'flyer_package'));
     expect(freeFolder(dir, 'flyer_package')).toBe(join(dir, 'flyer_package_2'));
     expect(freeFolder(dir, 'flyer_package', true)).toBe(join(dir, 'flyer_package'));
+  });
+  it('keeps dots in output names, dropping only a real extension', () => {
+    expect(nameStem('prueba-1.0.1')).toBe('prueba-1.0.1');
+    expect(nameStem('menu.2026')).toBe('menu.2026');
+    expect(nameStem('flyer.pdf')).toBe('flyer');
+    expect(nameStem('Catálogo v2.IDML')).toBe('Catálogo v2');
   });
   it('converts units to points', () => {
     expect(toPt(1, 'in')).toBe(72);

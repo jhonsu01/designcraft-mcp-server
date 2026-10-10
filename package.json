@@ -1,6 +1,6 @@
 {
   "name": "designcraft-mcp-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MCP server for DesignCraft: lay out flyers, posters, brochures, menus, cards, certificates and book pages (text, images, shapes, tables, paragraph styles), data-merge CSVs, edit .designcraft / InDesign .idml files and export print-ready PDF (PDF/X-4), PNG, IDML, EPUB and HTML with DesignCraft's own engine, from Claude (Windows, macOS, Linux).",
   "type": "module",
   "main": "dist/index.js",

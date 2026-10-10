@@ -160,13 +160,20 @@ export interface Exported {
   warnings?: string[];
 }
 
+/** A file name given by the user: kept as is (dots included), except a trailing output / document extension. */
+export function nameStem(name: string): string {
+  const exts = new Set<string>([...Object.values(OUTPUTS).filter(Boolean), ...DOCUMENTS, 'jpeg']);
+  const m = /\.([^.\\/]+)$/.exec(name);
+  return m && exts.has(m[1].toLowerCase()) ? name.slice(0, -m[0].length) : name;
+}
+
 /**
  * Export the active document once per format: output_path for the first, the others as
  * <output_dir or the base's folder>/<stem><suffix>.<ext>; never replacing anything unless overwrite.
  */
 export async function exportAll(
   s: DesignCraftSession,
-  base: { stemSource: string; suffix: string; output_dir?: string; output_path?: string; overwrite?: boolean },
+  base: { stemSource: string; name?: string; suffix: string; output_dir?: string; output_path?: string; overwrite?: boolean },
   formats: OutputFormat[],
   o: ExportOpts,
 ): Promise<Exported[]> {
@@ -179,7 +186,7 @@ export async function exportAll(
     if (usePath && (f === 'png' || f === 'jpg' || f === 'package')) throw new Error(`output_path cannot name ${f} output (one file per page / a folder); use output_dir.`);
     if (usePath && path.extname(base.output_path!).slice(1).toLowerCase() !== ext) throw new Error(`output_path must end in .${ext} for ${f}.`);
     const dir = base.output_dir ?? path.dirname(base.output_path ?? base.stemSource);
-    const stem = stemOf(base.output_path ?? base.stemSource) + (base.output_path ? '' : base.suffix);
+    const stem = base.output_path ? stemOf(base.output_path) : (base.name !== undefined ? nameStem(base.name) : stemOf(base.stemSource)) + base.suffix;
     const target = (e: string, suffix = '') =>
       usePath
         ? outputFor(base.output_path + '.__src', e, '', { output_path: base.output_path, overwrite: base.overwrite })

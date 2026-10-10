@@ -112,6 +112,8 @@ check(flyer.overset_text?.length === 1, 'create_layout: reports the overset text
 // the same output again never overwrites
 const again = await call('create_layout', { name: 'Volante café', items: [{ type: 'text', text: 'x' }], formats: ['pdf'], output_dir: join(out, 'flyer') });
 check(again.success && /Volante café_2\.pdf$/.test(again.outputs?.[0]?.path ?? ''), 'create_layout: an existing file gets a _2 name instead of being replaced');
+const dotted = await call('create_layout', { name: 'menú-1.0.1', items: [{ type: 'text', text: 'x' }], formats: ['pdf', 'png'], output_dir: join(out, 'dots') });
+check(dotted.success && dotted.outputs?.every((o) => /menú-1\.0\.1\.(pdf|png)$/.test(o.path) && existsSync(o.path)), `create_layout: dots in the name are kept (${dotted.outputs?.map((o) => o.path.split(/[\\/]/).pop()).join(', ')})`);
 const clash = await call('create_layout', { items: [{ type: 'text', text: 'x' }], formats: ['pdf'], output_path: fo.pdf?.path ?? join(out, 'x.pdf') });
 check(!clash.success && /exists/i.test(clash.error ?? ''), 'create_layout: an explicit existing output_path is refused without overwrite');
 

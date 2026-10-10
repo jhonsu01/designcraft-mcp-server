@@ -186,7 +186,7 @@ export function registerAdvancedTools(server: McpServer): void {
               }
             }
             let outputs: unknown[] | undefined;
-            if (args.formats?.length && !failed) outputs = await exportAll(s, { stemSource: path.join(dir!, args.name), suffix: '', output_dir: dir, output_path: args.output_path, overwrite: args.overwrite }, args.formats, args);
+            if (args.formats?.length && !failed) outputs = await exportAll(s, { stemSource: path.join(dir!, args.name), name: args.name, suffix: '', output_dir: dir, output_path: args.output_path, overwrite: args.overwrite }, args.formats, args);
             const img = args.preview_page ? await preview(s, args.preview_page - 1, await previewScale(s, 900)).catch(() => undefined) : undefined;
             return withPreview({ success: !failed, completed: results.length - failed, failed_steps: failed, results, ...(outputs ? { outputs } : {}) }, [img], !!failed);
           },

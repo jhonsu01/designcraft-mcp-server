@@ -159,7 +159,7 @@ claude mcp add designcraft -- node "$PWD/dist/bundle.cjs"
 ```bash
 npm run build       # TypeScript + 単一ファイルのバンドル（dist/bundle.cjs）
 npm test            # ユニットテスト（Windows、macOS、Linux のパス処理）
-npm run test:e2e    # 実際の MCP stdio による 27 項目のエンドツーエンド検査（合成画像と CSV）
+npm run test:e2e    # 実際の MCP stdio による 28 項目のエンドツーエンド検査（合成画像と CSV）
 npm run pack:mcpb   # designcraft-mcp-server.mcpb
 npm run pack:codex  # Codex 用プラグイン zip
 ```
