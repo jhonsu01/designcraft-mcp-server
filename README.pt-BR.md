@@ -119,6 +119,12 @@ As medidas são em **pt**, a menos que `units` diga `mm`, `cm`, `in` ou `px`; `x
 2. No Codex: *Plugins → Adicionar → Novo plugin*, escolha o zip e clique em **Adicionar plugin**.
 3. O Codex inicia o servidor com `node`, então o Node.js ≥ 20 precisa estar no `PATH`. Se o DesignCraft não estiver em um local padrão, defina `DESIGNCRAFT_DIR` ou `DESIGNCRAFT_CLI` como variáveis de ambiente do sistema (o Codex não tem formulário de configuração para plugins locais).
 
+### DeepSeek Harness
+
+1. *Plugins → Add plugin*, digite `github:jhonsu01/craft-marketplace#path:/plugins/designcraft-mcp-server` e clique em **Install** e depois em **Enable now**.
+2. O Harness inicia o servidor com seu próprio cliente MCP e `node` (Node.js ≥ 20 no `PATH`); as ferramentas aparecem como `mcp__designcraft__<ferramenta>` e os arquivos de saída como cartões que abrem no Harness.
+3. O Harness ainda não atualiza plugins sozinho: para atualizar, desinstale o plugin e instale-o de novo com o mesmo endereço.
+
 ### Claude Code / outros clientes MCP
 
 ```bash

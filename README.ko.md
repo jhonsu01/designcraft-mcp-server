@@ -119,6 +119,12 @@
 2. Codex에서 *플러그인 → 추가 → 새 플러그인*을 열고 zip을 선택한 뒤 **플러그인 추가**를 누릅니다.
 3. Codex는 `node`로 서버를 시작하므로 `PATH`에 Node.js ≥ 20이 있어야 합니다. DesignCraft가 표준 위치에 없다면 `DESIGNCRAFT_DIR` 또는 `DESIGNCRAFT_CLI`를 시스템 환경 변수로 설정하세요(Codex에는 로컬 플러그인용 설정 화면이 없습니다).
 
+### DeepSeek Harness
+
+1. *Plugins → Add plugin*에서 `github:jhonsu01/craft-marketplace#path:/plugins/designcraft-mcp-server`를 입력하고 **Install**, 이어서 **Enable now**를 누릅니다.
+2. Harness는 자체 MCP 클라이언트와 `node`(`PATH`에 Node.js ≥ 20 필요)로 서버를 시작합니다. 도구는 `mcp__designcraft__<도구>`로 표시되고, 출력 파일은 Harness에서 열리는 카드로 표시됩니다.
+3. Harness는 아직 플러그인을 자동으로 업데이트하지 않습니다. 업데이트하려면 플러그인을 제거한 뒤 같은 주소로 다시 설치하세요.
+
 ### Claude Code / 기타 MCP 클라이언트
 
 ```bash

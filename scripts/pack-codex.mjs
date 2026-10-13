@@ -77,8 +77,44 @@ writeFileSync(join(stage, '.codex-plugin', 'plugin.json'), JSON.stringify(plugin
 writeFileSync(join(stage, '.mcp.json'), JSON.stringify(mcp, null, 2) + '\n');
 copyFileSync(join(root, 'dist', 'bundle.cjs'), join(stage, 'dist', 'bundle.cjs'));
 copyFileSync(join(root, 'icon.png'), join(stage, 'assets', 'icon.png'));
-// the bundle reads ../package.json for its version
-writeFileSync(join(stage, 'package.json'), JSON.stringify({ name, version: pkg.version, description: pkg.description, license: pkg.license, private: true }, null, 2) + '\n');
+// The same folder is a DeepSeek Harness bundle: its cordis.patch.yml inserts Harness's own MCP client
+// (@deepseek-ai/dsh-mcp-client) running this server over stdio. `baseUrl` is the Harness profile folder,
+// where the package manager puts this package under node_modules/<name>.
+const serverName = name.replace(/-mcp-server$/, '');
+const bundlePath = `process.getBuiltinModule('url').fileURLToPath(new URL('node_modules/${name}/dist/bundle.cjs', baseUrl))`;
+const dshPatch = [
+  `# DeepSeek Harness: run ${manifest.display_name} through Harness's MCP client (tools appear as mcp__${serverName}__<tool>).`,
+  '- insert:',
+  `    - id: ${serverName}-bridge`,
+  "      name: '@deepseek-ai/dsh-mcp-client'",
+  '      config:',
+  `        serverName: ${serverName}`,
+  '        transport: stdio',
+  '        command: node',
+  '        args:',
+  `          - !!js ${JSON.stringify(bundlePath)}`,
+  '        toolCallTimeoutMs: 3600000',
+  '',
+].join('\n');
+writeFileSync(join(stage, 'cordis.patch.yml'), dshPatch);
+// the bundle reads ../package.json for its version; `dsh` makes the folder installable in DeepSeek Harness
+writeFileSync(
+  join(stage, 'package.json'),
+  JSON.stringify(
+    {
+      name,
+      version: pkg.version,
+      description: pkg.description,
+      license: pkg.license,
+      private: true,
+      type: 'module',
+      keywords: ['dsh', 'dsh-plugin', 'mcp'],
+      dsh: { bundle: { patch: './cordis.patch.yml' } },
+    },
+    null,
+    2,
+  ) + '\n',
+);
 for (const f of ['LICENSE', 'README.md']) copyFileSync(join(root, f), join(stage, f));
 
 // ---- minimal ZIP writer (deflate, UTF-8 names)

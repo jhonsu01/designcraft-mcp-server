@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.4] - 2026-10-13
+### Added
+- DeepSeek Harness: the plugin folder in the Craft Bridges marketplace is also a Harness bundle (`cordis.patch.yml`
+  inserting Harness's own MCP client, `@deepseek-ai/dsh-mcp-client`, over stdio with a 1-hour tool timeout).
+  Install it with `github:jhonsu01/craft-marketplace#path:/plugins/designcraft-mcp-server` in *Plugins → Add plugin*.
+- Server instructions: when the app has a tool that delivers files (`present` in Harness), also call it with the
+  output files, so they appear as cards that open in the app.
+### Verified
+- DeepSeek Harness 0.2.0-rc.2 on Windows 11: installed from GitHub, tools listed as `mcp__<server>__<tool>`, outputs
+  shown as cards that open in Harness's viewer. Windows 11 and Debian 12 end-to-end checks pass.
+
 ## [1.0.3] - 2026-10-13
 ### Added
 - Every result that names output files now carries `files_markdown`: ready-made links (percent-encoded `file:///`

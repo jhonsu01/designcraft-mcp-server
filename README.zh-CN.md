@@ -119,6 +119,12 @@
 2. 在 Codex 中：*插件 → 添加 → 新插件*，选择该 zip，然后点击 **添加插件**。
 3. Codex 用 `node` 启动服务器，因此 `PATH` 中必须有 Node.js ≥ 20。如果 DesignCraft 不在标准位置，请把 `DESIGNCRAFT_DIR` 或 `DESIGNCRAFT_CLI` 设为系统环境变量（Codex 没有本地插件的设置表单）。
 
+### DeepSeek Harness
+
+1. *Plugins → Add plugin*，输入 `github:jhonsu01/craft-marketplace#path:/plugins/designcraft-mcp-server`，点击 **Install**，再点击 **Enable now**。
+2. Harness 用自带的 MCP 客户端和 `node`（`PATH` 中需有 Node.js ≥ 20）启动服务器；工具显示为 `mcp__designcraft__<工具>`，输出文件显示为可在 Harness 中打开的卡片。
+3. Harness 目前不会自动更新插件：要更新，请卸载插件后用同一地址重新安装。
+
 ### Claude Code / 其他 MCP 客户端
 
 ```bash
