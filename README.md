@@ -161,7 +161,7 @@ claude mcp add designcraft -- node "$PWD/dist/bundle.cjs"
 ```bash
 npm run build       # TypeScript + single-file bundle (dist/bundle.cjs)
 npm test            # unit tests (Windows, macOS and Linux path logic)
-npm run test:e2e    # 28 end-to-end checks over real MCP stdio (synthetic images and CSV)
+npm run test:e2e    # 29 end-to-end checks over real MCP stdio (synthetic images and CSV)
 npm run pack:mcpb   # designcraft-mcp-server.mcpb
 npm run pack:codex  # Codex plugin zip
 ```

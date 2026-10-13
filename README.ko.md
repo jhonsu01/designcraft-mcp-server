@@ -161,7 +161,7 @@ claude mcp add designcraft -- node "$PWD/dist/bundle.cjs"
 ```bash
 npm run build       # TypeScript + 단일 파일 번들(dist/bundle.cjs)
 npm test            # 단위 테스트(Windows, macOS, Linux 경로 처리)
-npm run test:e2e    # 실제 MCP stdio를 통한 28개 종단 간 검사(합성 이미지와 CSV)
+npm run test:e2e    # 실제 MCP stdio를 통한 29개 종단 간 검사(합성 이미지와 CSV)
 npm run pack:mcpb   # designcraft-mcp-server.mcpb
 npm run pack:codex  # Codex 플러그인 zip
 ```

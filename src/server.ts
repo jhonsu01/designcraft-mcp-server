@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { registerAdvancedTools } from './tools/advanced.js';
 import { registerLayoutTools } from './tools/layout.js';
+import { LINK_INSTRUCTIONS } from './links.js';
 
 /** serverInfo.version comes from package.json (reachable as ../package.json from dist/ and src/). */
 export function readPackageVersion(): string {
@@ -29,7 +30,9 @@ export function createServer(): McpServer {
         'print-ready PDF (PDF/X-4, PDF/A-2b, bleed, crop marks), PNG / JPG pages, IDML, EPUB, HTML, booklets and packages. Sizes are in ' +
         'pt unless units says otherwise; x / y are measured from the top-left of each page. All paths must be absolute; inputs are only ' +
         'read; files are never overwritten unless overwrite is true. The engine runs headless and never touches the DesignCraft app unless ' +
-        'live=true.',
+        'live=true.' +
+        ' ' +
+        LINK_INSTRUCTIONS,
     },
   );
   registerLayoutTools(server);

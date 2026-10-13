@@ -7,6 +7,7 @@ import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
+import { fileURLToPath } from 'url';
 import { deflateSync } from 'zlib';
 
 const out = mkdtempSync(join(tmpdir(), 'dc-e2e-'));
@@ -58,9 +59,11 @@ await client.connect(new StdioClientTransport({ command: process.execPath, args:
 
 let failed = 0;
 const check = (cond, msg) => { console.log(`${cond ? 'PASS' : 'FAIL'}  ${msg}`); if (!cond) failed++; };
+const LINKED = [];
 const call = async (name, args) => {
   const res = await client.callTool({ name, arguments: args });
   const body = JSON.parse(res.content.find((c) => c.type === 'text').text);
+  if (body && body.files_markdown) LINKED.push(body.files_markdown);
   if (res.isError) console.log('      ', JSON.stringify(body).slice(0, 400));
   return { ...body, _imgs: res.content.filter((c) => c.type === 'image').length };
 };
@@ -202,6 +205,10 @@ check(rc.success && rc.completed === 4 && rc.outputs?.[0] && existsSync(rc.outpu
 const relPath = await call('export_document', { input_path: 'a.designcraft' });
 check(!relPath.success && /absolute/.test(relPath.error ?? ''), 'relative paths are rejected');
 check(readdirSync(src).length === 5, 'the input folder still holds only the original files');
+
+// every result that names output files carries working links to them
+const linkUrls = LINKED.flatMap((m) => [...m.matchAll(/\]\((file:\/\/\/[^)]+)\)/g)].map((x) => x[1]));
+check(linkUrls.length > 0 && linkUrls.every((u) => !/[ ()]/.test(u) && existsSync(fileURLToPath(u))), `files_markdown: ${linkUrls.length} file:/// links in ${LINKED.length} results, all valid and existing`);
 
 await client.close();
 console.log(`\n${failed ? `${failed} FAILED` : 'ALL PASSED'} in ${((Date.now() - t0) / 1000).toFixed(1)} s · output in ${out}`);

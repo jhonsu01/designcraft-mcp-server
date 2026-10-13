@@ -3,12 +3,13 @@ import * as path from 'path';
 import { z } from 'zod';
 import { DesignCraftSession } from '../engine.js';
 import { resolveOutputPath, stemOf } from '../paths.js';
+import { withFileLinks } from '../links.js';
 
 export type Content = { type: 'text'; text: string } | { type: 'image'; data: string; mimeType: string };
 export type ToolResult = { content: Content[]; isError?: boolean };
 
 export function json(obj: unknown, isError = false): ToolResult {
-  const out: ToolResult = { content: [{ type: 'text', text: JSON.stringify(obj, null, 2) }] };
+  const out: ToolResult = { content: [{ type: 'text', text: JSON.stringify(withFileLinks(obj), null, 2) }] };
   if (isError) out.isError = true;
   return out;
 }
